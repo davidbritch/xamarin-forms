@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:DataBinding101;assembly=DataBinding101" x:Class="DataBinding101.HomePage">
+	<ContentPage.BindingContext>
+		<local:DetailsViewModel />
+	</ContentPage.BindingContext>
+	<ContentPage.Content>
+		<StackLayout Padding="0,20,0,0">
+			<Label Text="Data Binding 101 Demo" Style="{DynamicResource TitleStyle}" HorizontalOptions="Center" />
+			<Label Text="Forename:" />
+			<Entry Text="{Binding Path=Forename, Mode=TwoWay}" />
+			<Label Text="Surname:" />
+			<Entry Text="{Binding Path=Surname, Mode=TwoWay}" />
+			<StackLayout Padding="0,20,0,0" Orientation="Horizontal">
+				<Label Text="Your forename is:" />
+				<Label Text="{Binding Forename}" />
+			</StackLayout>
+			<StackLayout Orientation="Horizontal">
+				<Label Text="Your surname is:" />
+				<Label Text="{Binding Surname}" />
+			</StackLayout>
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>
