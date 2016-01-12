@@ -34,10 +34,10 @@ namespace DataBinding101
 
 		protected virtual void OnPropertyChanged (string propertyName)
 		{
-			if (PropertyChanged != null) {
+			var changed = PropertyChanged;
+			if (changed != null) {
 				PropertyChanged (this, new PropertyChangedEventArgs (propertyName));
 			}
 		}
 	}
 }
-

@@ -7,6 +7,7 @@ namespace DataBinding101
 		public HomePage ()
 		{
 			InitializeComponent ();
+			BindingContext = new DetailsViewModel ();
 		}
 	}
 }
