@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Commanding.HomePage">
+	<StackLayout Padding="0,20,0,0">
+		<Label Text="Commanding Demo" FontAttributes="Bold" HorizontalOptions="Center" />
+		<Label Text="Demo 1" FontAttributes="Bold" />
+		<StackLayout Orientation="Horizontal">
+			<Label Text="Enter number:" />
+			<Entry x:Name="entry" Text="25" WidthRequest="50" />
+		</StackLayout>
+		<Button Text="Calculate Square Root" Command="{Binding SquareRootCommand}" CommandParameter="{Binding Source={x:Reference entry}, Path=Text}" HorizontalOptions="Center" />
+		<StackLayout Orientation="Horizontal">
+			<Label Text="Square root =" />
+			<Label Text="{Binding SquareRootResult}" />
+		</StackLayout>
+		<Label Text="Demo 2" FontAttributes="Bold" />
+		<Button Text="Simulate 5 Second Download" Command="{Binding SimulateDownloadCommand}" HorizontalOptions="Center" />
+		<StackLayout Orientation="Horizontal">
+			<Label Text="Result: " />
+			<Label Text="{Binding SimulatedDownloadResult}" />
+		</StackLayout>
+	</StackLayout>
+</ContentPage>
