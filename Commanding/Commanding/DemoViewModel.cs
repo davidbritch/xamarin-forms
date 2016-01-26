@@ -11,7 +11,11 @@ namespace Commanding
 		bool canDownload = true;
 		string simulatedDownloadResult;
 
+		public int Number { get; set; }
+
 		public double SquareRootResult { get; private set; }
+
+		public double SquareRootWithParameterResult { get; private set; }
 
 		public string SimulatedDownloadResult {
 			get { return simulatedDownloadResult; }
@@ -25,21 +29,31 @@ namespace Commanding
 
 		public ICommand SquareRootCommand { get; private set; }
 
+		public ICommand SquareRootWithParameterCommand { get; private set; }
+
 		public ICommand SimulateDownloadCommand { get; private set; }
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		public DemoViewModel ()
 		{
-			SquareRootCommand = new Command<string> (CalculateSquareRoot);
+			Number = 25;
+			SquareRootCommand = new Command (CalculateSquareRoot);
+			SquareRootWithParameterCommand = new Command<string> (CalculateSquareRoot);
 			SimulateDownloadCommand = new Command (async () => await SimulateDownloadAsync (), () => canDownload);
+		}
+
+		void CalculateSquareRoot ()
+		{
+			SquareRootResult = Math.Sqrt (Number);
+			OnPropertyChanged ("SquareRootResult");			
 		}
 
 		void CalculateSquareRoot (string value)
 		{
 			double num = Convert.ToDouble (value);
-			SquareRootResult = Math.Sqrt ((double)num);
-			OnPropertyChanged ("SquareRootResult");			
+			SquareRootWithParameterResult = Math.Sqrt (num);
+			OnPropertyChanged ("SquareRootWithParameterResult");			
 		}
 
 		async Task SimulateDownloadAsync ()
