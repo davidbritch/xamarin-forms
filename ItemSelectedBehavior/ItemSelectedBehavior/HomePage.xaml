@@ -7,7 +7,7 @@
 	</ContentPage.Resources>
 	<StackLayout Padding="0,20,0,0">
 		<Label Text="Behaviors Demo" FontAttributes="Bold" HorizontalOptions="Center" />
-		<ListView x:Name="listView" ItemsSource="{Binding People}">
+		<ListView ItemsSource="{Binding People}">
 			<ListView.Behaviors>
 				<local:ListViewSelectedItemBehavior Command="{Binding OutputAgeCommand}" Converter="{StaticResource SelectedItemConverter}" />
 				<!--				<local:EventToCommandBehavior EventName="ItemSelected" Command="{Binding OutputAgeCommand}" Converter="{StaticResource SelectedItemConverter}" />-->
