@@ -6,8 +6,8 @@ namespace ItemSelectedBehavior
 {
 	public class ListViewSelectedItemBehavior : Behavior<ListView>
 	{
-		public static readonly BindableProperty CommandProperty = BindableProperty.Create ("Command", typeof(ICommand), typeof(EventToCommandBehavior), null);
-		public static readonly BindableProperty InputConverterProperty = BindableProperty.Create ("Converter", typeof(IValueConverter), typeof(EventToCommandBehavior), null);
+		public static readonly BindableProperty CommandProperty = BindableProperty.Create ("Command", typeof(ICommand), typeof(ListViewSelectedItemBehavior), null);
+		public static readonly BindableProperty InputConverterProperty = BindableProperty.Create ("Converter", typeof(IValueConverter), typeof(ListViewSelectedItemBehavior), null);
 
 		public ICommand Command {
 			get { return (ICommand)GetValue (CommandProperty); }
