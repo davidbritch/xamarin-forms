@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="HelloWorld.HomePage">
+	<StackLayout Padding="0,20,0,0">
+		<Slider Minimum="0" Maximum="100" VerticalOptions="CenterAndExpand" ValueChanged="OnValueChanged" />
+		<Label x:Name="valueLabel" Text="0" HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand" FontSize="Large" FontAttributes="Bold" TextColor="Red" />
+		<Button Text="Click Me" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Clicked="OnButtonClicked" />
+	</StackLayout>
+</ContentPage>
