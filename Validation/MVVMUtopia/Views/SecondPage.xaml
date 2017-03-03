@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:MVVMUtopia" x:Class="MVVMUtopia.SecondPage" local:ViewModelLocator.AutoWireViewModel="true" Title="Second Page">
+	<StackLayout Margin="20">
+		<Label Text="Second Page" HorizontalOptions="Center" />
+		<Button Text="Navigate Back" Command="{Binding NavigateBackCommand}" HorizontalOptions="Center" />
+	</StackLayout>
+</ContentPage>

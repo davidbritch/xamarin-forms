@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:MVVMUtopia" x:Class="MVVMUtopia.FirstPage" local:ViewModelLocator.AutoWireViewModel="true" Title="First Page">
+	<ContentPage.Resources>
+		<ResourceDictionary>
+			<local:FirstErrorConverter x:Key="FirstErrorConverter" />
+		</ResourceDictionary>
+	</ContentPage.Resources>
+	<Grid Margin="20">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="40" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="40" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+		<Entry Placeholder="Enter forename here" Text="{Binding User.Forename, Mode=TwoWay}" local:Validation.Errors="{Binding User.Errors[Forename]}" />
+		<Label Grid.Row="1" Text="{Binding User.Errors[Forename], Converter={StaticResource FirstErrorConverter}" FontSize="Small" TextColor="Red" />
+		<Entry Grid.Row="2" Placeholder="Enter surname here" Text="{Binding User.Surname, Mode=TwoWay}" local:Validation.Errors="{Binding User.Errors[Surname]}" />
+		<Label Grid.Row="3" Text="{Binding User.Errors[Surname], Converter={StaticResource FirstErrorConverter}" FontSize="Small" TextColor="Red" />
+		<Button Grid.Row="4" Text="Navigate" Command="{Binding NavigateCommand}" HorizontalOptions="Center" />
+	</Grid>
+</ContentPage>
