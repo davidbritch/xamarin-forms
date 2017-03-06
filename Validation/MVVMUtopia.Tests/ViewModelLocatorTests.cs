@@ -50,7 +50,7 @@ namespace MVVMUtopia.Tests
 
 			ViewModelLocator.SetDefaultViewModelFactory((viewModelType) =>
 			{
-				return Activator.CreateInstance(viewModelType) as ViewModelBase;
+				return Activator.CreateInstance(viewModelType) as BindableBase;
 			});
 
 			ViewModelLocator.SetAutoWireViewModel(page, true);

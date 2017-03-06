@@ -6,7 +6,7 @@ using System.ComponentModel;
 
 namespace MVVMUtopia
 {
-	public class ValidatableBase : ViewModelBase, IValidatableBase
+	public class ValidatableBase : BindableBase, IValidatableBase
 	{
 		readonly Validator validator;
 

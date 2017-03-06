@@ -1,6 +1,6 @@
 ﻿namespace MVVMUtopia.Tests
 {
-	public class MockPageViewModel : ViewModelBase
+	public class MockPageViewModel : BindableBase
 	{
 	}
 }

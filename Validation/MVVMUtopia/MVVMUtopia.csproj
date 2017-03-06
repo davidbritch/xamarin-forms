@@ -40,7 +40,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MVVM\ViewModelBase.cs" />
+    <Compile Include="MVVM\BindableBase.cs" />
     <Compile Include="MVVM\ViewModelLocator.cs" />
     <Compile Include="Views\FirstPage.xaml.cs">
       <DependentUpon>FirstPage.xaml</DependentUpon>

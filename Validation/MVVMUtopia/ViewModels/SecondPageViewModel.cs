@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace MVVMUtopia
 {
-	public class SecondPageViewModel : ViewModelBase
+	public class SecondPageViewModel : BindableBase
 	{
 		INavigationService navigationService;
 
