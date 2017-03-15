@@ -12,8 +12,8 @@ namespace MVVMUtopia
 
 		public bool IsValidationEnabled
 		{
-			get { return this.validator.IsValidationEnabled; }
-			set { this.validator.IsValidationEnabled = value; }
+			get { return validator.IsValidationEnabled; }
+			set { validator.IsValidationEnabled = value; }
 		}
 
 		public Validator Errors

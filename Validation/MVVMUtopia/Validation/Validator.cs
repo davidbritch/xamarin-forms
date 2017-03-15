@@ -121,7 +121,7 @@ namespace MVVMUtopia
 			return errors.Values.Count == 0;
 		}
 
-		private bool TryValidateProperty(PropertyInfo propertyInfo, List<string> propertyErrors)
+		bool TryValidateProperty(PropertyInfo propertyInfo, List<string> propertyErrors)
 		{
 			var results = new List<ValidationResult>();
 			var context = new ValidationContext(entityToValidate) { MemberName = propertyInfo.Name };

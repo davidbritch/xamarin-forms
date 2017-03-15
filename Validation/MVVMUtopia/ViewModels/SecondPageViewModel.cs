@@ -8,14 +8,14 @@ namespace MVVMUtopia
 	{
 		INavigationService navigationService;
 
-		public ICommand NavigateBackCommand => new Command(async () => await GoBack());
+		public ICommand NavigateBackCommand => new Command(async () => await GoBackAsync());
 
 		public SecondPageViewModel(INavigationService navService)
 		{
 			navigationService = navService;
 		}
 
-		async Task GoBack()
+		async Task GoBackAsync()
 		{
 			await navigationService.GoBackAsync();
 		}

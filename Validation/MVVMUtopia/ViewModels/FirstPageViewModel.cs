@@ -15,7 +15,7 @@ namespace MVVMUtopia
 			set { SetProperty(ref user, value); }
 		}
 
-		public ICommand NavigateCommand => new Command(async () => await NavigateToSecondPage());
+		public ICommand NavigateCommand => new Command(async () => await NavigateAsync());
 
 		public FirstPageViewModel(INavigationService navService)
 		{
@@ -23,7 +23,7 @@ namespace MVVMUtopia
 			user = new User();
 		}
 
-		async Task NavigateToSecondPage()
+		async Task NavigateAsync()
 		{
 			if (user.ValidateProperties())
 			{
