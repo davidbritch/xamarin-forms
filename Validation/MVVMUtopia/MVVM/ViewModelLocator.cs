@@ -10,17 +10,6 @@ namespace MVVMUtopia
 	{
 		static Dictionary<string, Func<object>> factories = new Dictionary<string, Func<object>>();
 
-		static Func<Type, object> defaultViewModelFactory = type => Activator.CreateInstance(type);
-
-		static Func<Type, Type> defaultViewTypeToViewModelTypeResolver = viewType =>
-		{
-			var viewName = viewType.FullName;
-			viewName = viewName.Replace(".Views.", ".ViewModels.");
-			var viewAssemblyName = viewType.GetTypeInfo().Assembly.FullName;
-			var viewModelName = string.Format(CultureInfo.InvariantCulture, "{0}ViewModel, {1}", viewName, viewAssemblyName);
-			return Type.GetType(viewModelName);
-		};
-
 		public static readonly BindableProperty AutoWireViewModelProperty =
 			BindableProperty.CreateAttached("AutoWireViewModel", typeof(bool), typeof(ViewModelLocator), default(bool), propertyChanged: OnAutoWireViewModelChanged);
 
@@ -48,12 +37,17 @@ namespace MVVMUtopia
 			// Fall back to convention based
 			if (viewModel == null)
 			{
-				var viewModelType = defaultViewTypeToViewModelTypeResolver(view.GetType());
+				var viewType = view.GetType();
+				var viewName = viewType.FullName.Replace(".Views.", ".ViewModels.");
+				var viewAssemblyName = viewType.GetTypeInfo().Assembly.FullName;
+				var viewModelName = string.Format(CultureInfo.InvariantCulture, "{0}ViewModel, {1}", viewName, viewAssemblyName);
+				var viewModelType = Type.GetType(viewModelName);
+
 				if (viewModelType == null)
 				{
 					return;
 				}
-				viewModel = defaultViewModelFactory(viewModelType);
+				viewModel = Activator.CreateInstance(viewModelType);
 			}
 
 			view.BindingContext = viewModel;
@@ -71,16 +65,6 @@ namespace MVVMUtopia
 		public static void Register(string viewTypeName, Func<object> factory)
 		{
 			factories[viewTypeName] = factory;
-		}
-
-		public static void SetDefaultViewModelFactory(Func<Type, object> viewModelFactory)
-		{
-			defaultViewModelFactory = viewModelFactory;
-		}
-
-		public static void SetDefaultViewTypeToViewModelTypeResolver(Func<Type, Type> viewTypeToViewModelTypeResolver)
-		{
-			defaultViewTypeToViewModelTypeResolver = viewTypeToViewModelTypeResolver;
 		}
 	}
 }
