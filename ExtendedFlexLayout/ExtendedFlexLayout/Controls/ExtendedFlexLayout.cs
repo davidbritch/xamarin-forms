@@ -5,8 +5,8 @@ namespace ExtendedFlexLayout
 {
     public class ExtendedFlexLayout : FlexLayout
     {
-        public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(nameof(ItemsSourceProperty), typeof(IEnumerable), typeof(ExtendedFlexLayout), propertyChanged: OnItemsSourceChanged);
-        public static readonly BindableProperty ItemTemplateProperty = BindableProperty.Create(nameof(ItemTemplateProperty), typeof(DataTemplate), typeof(ExtendedFlexLayout));
+        public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(nameof(ItemsSource), typeof(IEnumerable), typeof(ExtendedFlexLayout), propertyChanged: OnItemsSourceChanged);
+        public static readonly BindableProperty ItemTemplateProperty = BindableProperty.Create(nameof(ItemTemplate), typeof(DataTemplate), typeof(ExtendedFlexLayout));
 
         public IEnumerable ItemsSource
         {
