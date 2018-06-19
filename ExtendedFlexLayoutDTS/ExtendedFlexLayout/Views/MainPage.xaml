@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:ExtendedFlexLayout" x:Class="ExtendedFlexLayout.MainPage">
+    <ContentPage.BindingContext>
+        <local:MainPageViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <Style x:Key="normalMonkeyFrame" TargetType="Frame">
+            <Setter Property="BackgroundColor" Value="LightYellow" />
+            <Setter Property="BorderColor" Value="Blue" />
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="CornerRadius" Value="15" />
+        </Style>
+
+        <Style x:Key="cynicalMonkeyFrame" TargetType="Frame">
+            <Setter Property="BackgroundColor" Value="Red" />
+            <Setter Property="BorderColor" Value="Black" />
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="CornerRadius" Value="15" />
+        </Style>
+            
+        <Style TargetType="Label">
+            <Setter Property="Margin" Value="0, 4" />
+        </Style>
+
+        <Style x:Key="headerLabel" TargetType="Label">
+            <Setter Property="Margin" Value="0, 8" />
+            <Setter Property="FontSize" Value="Large" />
+            <Setter Property="TextColor" Value="Blue" />
+        </Style>
+
+        <Style TargetType="Image">
+            <Setter Property="FlexLayout.Order" Value="-1" />
+            <Setter Property="FlexLayout.AlignSelf" Value="Center" />
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Text" Value="LEARN MORE" />
+            <Setter Property="FontSize" Value="Large" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="BackgroundColor" Value="Green" />
+            <Setter Property="BorderRadius" Value="20" />
+        </Style>
+
+        <local:StringToImageSourceConverter x:Key="stringToImageConverter" />
+
+        <DataTemplate x:Key="normalMonkeyTemplate">
+            <Frame WidthRequest="300"
+                   HeightRequest="480"
+                   Style="{StaticResource normalMonkeyFrame}">
+                <FlexLayout Direction="Column">
+                    <Label Text="{Binding Name}" 
+                           Style="{StaticResource headerLabel}" />
+                    <Label Text="{Binding Description}" />
+                    <Label Text="{Binding Trait1}" Margin="10,0,0,0" />
+                    <Label Text="{Binding Trait2}" Margin="10,0,0,0" />
+                    <Label Text="{Binding Trait3}" Margin="10,0,0,0" />
+                    <Image Source="{Binding Image, Converter={StaticResource stringToImageConverter}}"
+                           WidthRequest="180"
+                           HeightRequest="180" />
+                    <Label FlexLayout.Grow="1" />
+                    <Button />
+                </FlexLayout>
+            </Frame>
+        </DataTemplate>
+        
+        <DataTemplate x:Key="cynicalMonkeyTemplate">
+            <Frame WidthRequest="300"
+                   HeightRequest="480"
+                   Style="{StaticResource cynicalMonkeyFrame}">
+                <FlexLayout Direction="Column">
+                    <Label Text="{Binding Name}" 
+                           Style="{StaticResource headerLabel}" />
+                    <Label Text="{Binding Description}" />
+                    <Label Text="{Binding Trait1}" Margin="10,0,0,0" />
+                    <Label Text="{Binding Trait2}" Margin="10,0,0,0" />
+                    <Label Text="{Binding Trait3}" Margin="10,0,0,0" />
+                    <Image Source="{Binding Image, Converter={StaticResource stringToImageConverter}}"
+                           WidthRequest="180"
+                           HeightRequest="180" />
+                    <Label FlexLayout.Grow="1" />
+                    <Button />
+                </FlexLayout>
+            </Frame>
+        </DataTemplate>
+
+        <local:MonkeyDataTemplateSelector x:Key="monkeyDataTemplateSelector"
+                                          NormalMonkeyTemplate="{StaticResource normalMonkeyTemplate}"
+                                          CynicalMonkeyTemplate="{StaticResource cynicalMonkeyTemplate}" />
+    </ContentPage.Resources>
+
+    <StackLayout VerticalOptions="CenterAndExpand">
+        <Label Text="Monkeys" HorizontalOptions="Center" Style="{DynamicResource TitleStyle}" />
+            <ScrollView Orientation="Horizontal" Margin="0,20">
+                <local:ExtendedFlexLayout ItemsSource="{Binding Monkeys}" ItemTemplate="{StaticResource monkeyDataTemplateSelector}" />
+            </ScrollView>
+    </StackLayout>
+</ContentPage>
