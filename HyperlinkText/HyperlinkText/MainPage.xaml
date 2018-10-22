@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:local="clr-namespace:HyperlinkText" 
+             x:Class="HyperlinkText.MainPage">
+    <StackLayout Margin="20">
+        <Label Text="Hyperlink Demo" 
+               HorizontalOptions="Center" 
+               FontAttributes="Bold" />
+        <Label>
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="Deliver native Android, iOS, and Windows apps with a single shared .NET code base. For more information, see " />
+                    <Span Text="Xamarin documentation"
+                          TextColor="Blue"
+                          TextDecorations="Underline">
+                        <Span.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TapCommand}"
+                                                  CommandParameter="https://docs.microsoft.com/xamarin/" />
+                        </Span.GestureRecognizers>
+                    </Span>
+                    <Span Text="." />
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+    </StackLayout>
+</ContentPage>
