@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:skiaforms="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+             x:Class="Imaging.BasicImagingPage"
+             Title="Basic Imaging">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="Load"
+                     Clicked="OnLoadPhotoClicked" />
+        <ToolbarItem Name="Save"
+                     Clicked="OnSavePhotoClicked" />
+    </ContentPage.ToolbarItems>
+    
+    <StackLayout Margin="20">
+        <skiaforms:SKCanvasView x:Name="canvasView"
+                                VerticalOptions="FillAndExpand"
+                                PaintSurface="OnCanvasViewPaintSurface" />
+        <Picker x:Name="picker"
+                Title="Select Imaging Operation"
+                SelectedIndexChanged="OnPickerSelectedIndexChanged"
+                IsEnabled="false">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Greyscale</x:String>
+                    <x:String>Otsu Threshold</x:String>
+                    <x:String>Sepia</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+        <Button x:Name="processButton"
+                Text="Process"
+                Clicked="OnProcessButtonClicked"
+                IsEnabled="false" />
+    </StackLayout>
+</ContentPage>

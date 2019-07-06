@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:skiaforms="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+             x:Class="Imaging.ConvolutionKernelsPage"
+             Title="Convolution">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="Load"
+                     Clicked="OnLoadPhotoClicked" />
+        <ToolbarItem Name="Save"
+                     Clicked="OnSavePhotoClicked" />
+    </ContentPage.ToolbarItems>
+    
+    <StackLayout Margin="20">
+        <skiaforms:SKCanvasView x:Name="canvasView"
+                                VerticalOptions="FillAndExpand"
+                                PaintSurface="OnCanvasViewPaintSurface" />
+        <Picker x:Name="picker"
+                Title="Select Convolution Kernel"
+                SelectedIndexChanged="OnPickerSelectedIndexChanged"
+                IsEnabled="false">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Box Blur</x:String>
+                    <x:String>Blur</x:String>
+                    <x:String>Edge Detection</x:String>
+                    <x:String>Emboss</x:String>
+                    <x:String>Gaussian Blur</x:String>
+                    <x:String>Identity</x:String>
+                    <x:String>Laplacian of Gaussian</x:String>
+                    <x:String>Sharpen</x:String>
+                    <x:String>Sobel Bottom</x:String>
+                    <x:String>Sobel Left</x:String>
+                    <x:String>Sobel Right</x:String>
+                    <x:String>Sobel Top</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+        <Button x:Name="processButton"
+                Text="Process"
+                Clicked="OnProcessButtonClicked"
+                IsEnabled="false" />
+    </StackLayout>
+    
+</ContentPage>
