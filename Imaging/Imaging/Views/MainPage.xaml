@@ -15,6 +15,10 @@
                           Detail="Selectable convolution kernels"
                           Command="{Binding NavigateCommand}"
                           CommandParameter="{x:Type local:ConvolutionKernelsPage}" />
+                <TextCell Text="Frequency Filter"
+                          Detail="2D FFT"
+                          Command="{Binding NavigateCommand}"
+                          CommandParameter="{x:Type local:FrequencyFilterPage}" />
             </TableSection>
         </TableRoot>
     </TableView>

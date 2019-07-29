@@ -155,5 +155,51 @@ namespace Imaging
 
             return pixmap;
         }
+
+        static unsafe ComplexImage ToComplexImage(this SKImage image)
+        {
+            SKPixmap pixmap = image.PeekPixels();
+            byte* bmpPtr = (byte*)pixmap.GetPixels().ToPointer();
+            int width = image.Width;
+            int height = image.Height;
+
+            if ((!MathHelpers.IsPowerOf2(width)) || (!MathHelpers.IsPowerOf2(height)))
+            {
+                throw new ArgumentException("Image width and height must be a power of 2.");
+            }
+
+            ComplexImage complexImage = new ComplexImage(width, height);
+            Complex[,] data = complexImage.Data;
+
+            for (int row = 0; row < height; row++)
+            {
+                for (int col = 0; col < width; col++)
+                {
+                    byte red = *bmpPtr++;
+                    byte green = *bmpPtr++;
+                    byte blue = *bmpPtr++;
+                    bmpPtr += 1; // Ignore alpha
+
+                    // Assuming SKColorType.Rgba8888 - used by iOS and Android
+                    // (UWP uses SKColorType.Bgra8888)
+                    byte result = (byte)(0.2126 * red + 0.7152 * green + 0.0722 * blue);
+                    data[row, col].Re = (float)result / 255;
+                }
+            }
+            return complexImage;
+        }
+
+        public static unsafe SKPixmap FrequencyFilter(this SKImage image, int min, int max)
+        {
+            ComplexImage complexImage = image.ToComplexImage();
+
+            complexImage.FastFourierTransform();
+            FrequencyFilter filter = new FrequencyFilter(new FrequencyRange(min, max));
+            filter.Apply(complexImage);
+            complexImage.ReverseFastFourierTransform();
+
+            SKPixmap pixmap = complexImage.ToSKPixmap(image);
+            return pixmap;
+        }
     }
 }

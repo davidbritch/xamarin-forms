@@ -78,7 +78,7 @@ namespace Imaging
                     sizeI = new SKSizeI(5, 5);
                     break;
                 case 7:
-                    kernel = ConvolutionKernels.Sharpen;;
+                    kernel = ConvolutionKernels.Sharpen; ;
                     break;
                 case 8:
                     kernel = ConvolutionKernels.SobelBottom;

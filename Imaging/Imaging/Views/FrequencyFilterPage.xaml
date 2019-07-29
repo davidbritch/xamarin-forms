@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:skiaforms="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+             x:Class="Imaging.FrequencyFilterPage"
+             Title="Frequency filtering">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="Load"
+                     Clicked="OnLoadPhotoClicked" />
+        <ToolbarItem Name="Save"
+                     Clicked="OnSavePhotoClicked" />
+    </ContentPage.ToolbarItems>
+    
+    <StackLayout Margin="20">
+        <skiaforms:SKCanvasView x:Name="canvasView"
+                                VerticalOptions="FillAndExpand"
+                                PaintSurface="OnCanvasViewPaintSurface" />
+        <Slider x:Name="minSlider"
+                Maximum="1024"
+                Minimum="0"
+                Value="0"
+                IsEnabled="false" />
+        <Label Text="{Binding Source={x:Reference minSlider}, Path=Value, StringFormat='Min = {0:F0}'}"
+               HorizontalOptions="Center" />
+        <Slider x:Name="maxSlider" 
+                Maximum="1024"
+                Minimum="0"
+                Value="128"
+                IsEnabled="false" />
+        <Label Text="{Binding Source={x:Reference maxSlider}, Path=Value, StringFormat='Max = {0:F0}'}"
+               HorizontalTextAlignment="Center" />
+        <Button x:Name="processButton"
+                Text="Process"
+                Clicked="OnProcessButtonClicked"
+                IsEnabled="false" />
+    </StackLayout>
+</ContentPage>

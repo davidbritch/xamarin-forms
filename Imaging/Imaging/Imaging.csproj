@@ -24,6 +24,7 @@
     <Folder Include="Extensions\" />
     <Folder Include="Imaging\" />
     <Folder Include="Views\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\MainPage.xaml.cs">
