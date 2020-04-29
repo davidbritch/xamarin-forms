@@ -9,12 +9,7 @@ namespace TodoREST.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-
             LoadApplication(new App());
-
-#if DEBUG
-            System.Net.ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
-#endif
             return base.FinishedLaunching(app, options);
         }
     }

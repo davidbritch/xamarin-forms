@@ -1,9 +1,9 @@
 ﻿using System.Net.Http;
-using TodoREST.Droid;
+using TodoREST.iOS;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(HttpClientHandlerService))]
-namespace TodoREST.Droid
+namespace TodoREST.iOS
 {
     public class HttpClientHandlerService : IHttpClientHandlerService
     {

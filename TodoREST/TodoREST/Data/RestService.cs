@@ -11,21 +11,13 @@ namespace TodoREST
 {
     public class RestService : IRestService
     {
-        HttpClient _client;
+        HttpClient client;
 
         public List<TodoItem> Items { get; private set; }
 
         public RestService()
         {
-            switch (Device.RuntimePlatform)
-            {
-                case Device.Android:
-                    _client = new HttpClient(DependencyService.Get<IHttpClientHandlerService>().GetInsecureHandler());
-                    break;
-                default:
-                    _client = new HttpClient();
-                    break;
-            }
+            client = new HttpClient(DependencyService.Get<IHttpClientHandlerService>().GetInsecureHandler());
         }
 
         public async Task<List<TodoItem>> RefreshDataAsync()
@@ -35,7 +27,7 @@ namespace TodoREST
             var uri = new Uri(string.Format(Constants.RestUrl, string.Empty));
             try
             {
-                var response = await _client.GetAsync(uri);
+                var response = await client.GetAsync(uri);
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
@@ -62,11 +54,11 @@ namespace TodoREST
                 HttpResponseMessage response = null;
                 if (isNewItem)
                 {
-                    response = await _client.PostAsync(uri, content);
+                    response = await client.PostAsync(uri, content);
                 }
                 else
                 {
-                    response = await _client.PutAsync(uri, content);
+                    response = await client.PutAsync(uri, content);
                 }
 
                 if (response.IsSuccessStatusCode)
@@ -87,7 +79,7 @@ namespace TodoREST
 
             try
             {
-                var response = await _client.DeleteAsync(uri);
+                var response = await client.DeleteAsync(uri);
 
                 if (response.IsSuccessStatusCode)
                 {
