@@ -15,7 +15,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.0.0.425677" />
+    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1269" />
     <PackageReference Include="SkiaSharp" Version="1.68.0" />
     <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.0" />
   </ItemGroup>
@@ -25,6 +25,8 @@
     <Folder Include="Imaging\" />
     <Folder Include="Views\" />
     <Folder Include="Helpers\" />
+    <Folder Include="Imaging\Wavelets\" />
+    <Folder Include="Imaging\FFT\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\MainPage.xaml.cs">

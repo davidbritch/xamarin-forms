@@ -201,5 +201,155 @@ namespace Imaging
             SKPixmap pixmap = complexImage.ToSKPixmap(image);
             return pixmap;
         }
+
+        static unsafe void ToYCbCrAArrays(this SKImage image, float[,] y, float[,] cb, float[,] cr, float[,] a)
+        {
+            if (y == null)
+                throw new ArgumentException("y can't be null");
+            if (cb == null)
+                throw new ArgumentException("cb can't be null");
+            if (cr == null)
+                throw new ArgumentException("cr can't be null");
+            if (a == null)
+                throw new ArgumentException("a can't be null");
+
+            SKPixmap pixmap = image.PeekPixels();
+            byte* bmpPtr = (byte*)pixmap.GetPixels().ToPointer();
+            int width = image.Width;
+            int height = image.Height;
+
+            for (int row = 0; row < height; row++)
+            {
+                for (int col = 0; col < width; col++)
+                {
+                    byte red = *bmpPtr++;
+                    byte green = *bmpPtr++;
+                    byte blue = *bmpPtr++;
+                    byte alpha = *bmpPtr++;
+
+                    y[col, row] = (0.2990f * red + 0.5870f * green + 0.1140f * blue + 0.5f);
+                    cb[col, row] = (-0.1687f * red - 0.3313f * green + 0.5000f * blue + 127.5f + 0.5f);
+                    cr[col, row] = (0.5000f * red - 0.4187f * green - 0.0813f * blue + 127.5f + 0.5f);
+                    a[col, row] = alpha;
+                }
+            }
+        }
+
+        static unsafe SKPixmap ToRGBAPixmap(this SKImage image, float[,] y, float[,] cb, float[,] cr, float[,] a)
+        {
+            if (y == null)
+                throw new ArgumentException("y can't be null");
+            if (cb == null)
+                throw new ArgumentException("cb can't be null");
+            if (cr == null)
+                throw new ArgumentException("cr can't be null");
+            if (a == null)
+                throw new ArgumentException("a can't be null");
+
+            SKPixmap pixmap = image.PeekPixels();
+            byte* bmpPtr = (byte*)pixmap.GetPixels().ToPointer();
+            int width = image.Width;
+            int height = image.Height;
+
+            for (int row = 0; row < height; row++)
+            {
+                for (int col = 0; col < width; col++)
+                {
+                    float yValue = y[col, row];
+                    float cbValue = cb[col, row] - 127.5f;
+                    float crValue = cr[col, row] - 127.5f;
+                    float aValue = a[col, row];
+
+                    int red = (int)(yValue + 1.40200f * crValue + 0.5f);
+                    int green = (int)(yValue - 0.34414f * cbValue - 0.71417f * crValue + 0.5f);
+                    int blue = (int)(yValue + 1.77200f * cbValue + 0.5f);
+                    int alpha = (int)aValue;
+
+                    if (red < 0)
+                        red = 0;
+                    else if (red > 255)
+                        red = 255;
+
+                    if (green < 0)
+                        green = 0;
+                    else if (green > 255)
+                        green = 255;
+
+                    if (blue < 0)
+                        blue = 0;
+                    else if (blue > 255)
+                        blue = 255;
+
+                    if (alpha < 0)
+                        alpha = 0;
+                    else if (alpha > 255)
+                        alpha = 255;
+
+                    *bmpPtr++ = (byte)red;
+                    *bmpPtr++ = (byte)green;
+                    *bmpPtr++ = (byte)blue;
+                    *bmpPtr++ = (byte)alpha;
+                }
+            }
+            return pixmap;
+        }
+
+        public static unsafe SKPixmap WaveletUpscale(this SKImage image, Wavelet wavelet)
+        {
+            int width = image.Width;
+            int height = image.Height;
+            int upscaledWidth = width * 2;
+            int upscaledHeight = height * 2;
+                        
+            float[,] y = new float[upscaledWidth, upscaledWidth];
+            float[,] cb = new float[upscaledWidth, upscaledWidth];
+            float[,] cr = new float[upscaledWidth, upscaledWidth];
+            float[,] a = new float[upscaledWidth, upscaledWidth];
+
+            image.ToYCbCrAArrays(y, cb, cr, a);
+
+            WaveletTransform2D wavelet2D;
+            WaveletTransform2D upscaledWavelet2D;
+
+            switch (wavelet)
+            {
+                case Wavelet.Haar:
+                    wavelet2D = new HaarWavelet2D(width, height);
+                    upscaledWavelet2D = new HaarWavelet2D(upscaledWidth, upscaledHeight);
+                    break;
+                case Wavelet.Biorthogonal53:
+                default:
+                    wavelet2D = new Biorthogonal53Wavelet2D(width, height);
+                    upscaledWavelet2D = new Biorthogonal53Wavelet2D(upscaledWidth, upscaledHeight);
+                    break;
+            }
+
+            wavelet2D.Transform2D(y);
+            wavelet2D.Transform2D(cb);
+            wavelet2D.Transform2D(cr);
+            wavelet2D.Transform2D(a);
+
+            upscaledWavelet2D.ReverseTransform2D(y);
+            upscaledWavelet2D.ReverseTransform2D(cb);
+            upscaledWavelet2D.ReverseTransform2D(cr);
+            upscaledWavelet2D.ReverseTransform2D(a);
+
+            for (int row = 0; row < upscaledHeight; row++)
+            {
+                for (int col = 0; col < upscaledWidth; col++)
+                {
+                    y[col, row] *= 4.0f;
+                    cb[col, row] *= 4.0f;
+                    cr[col, row] *= 4.0f;
+                    a[col, row] *= 4.0f;
+                }
+            }
+
+            SKImageInfo info = new SKImageInfo(upscaledWidth, upscaledHeight, SKColorType.Rgba8888);
+            SKImage output = SKImage.Create(info);
+
+            SKPixmap pixmap = output.ToRGBAPixmap(y, cb, cr, a);
+            return pixmap;                        
+        }
     }
 }

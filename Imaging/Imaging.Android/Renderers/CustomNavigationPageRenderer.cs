@@ -49,7 +49,7 @@ namespace Imaging.Droid
 
             if (Element.CurrentPage is IModalPage)
             {
-                modalToolbar?.SetNavigationIcon(Resource.Drawable.ic_dialog_close_dark);
+                modalToolbar?.SetNavigationIcon(Resource.Drawable.ic_mtrl_chip_close_circle);
             }
         }
 

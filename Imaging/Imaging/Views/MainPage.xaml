@@ -19,8 +19,11 @@
                           Detail="2D FFT"
                           Command="{Binding NavigateCommand}"
                           CommandParameter="{x:Type local:FrequencyFilterPage}" />
+                <TextCell Text="Image Upscaling"
+                          Detail="2D wavelet transform"
+                          Command="{Binding NavigateCommand}"
+                          CommandParameter="{x:Type local:ImageUpscalePage}" />
             </TableSection>
         </TableRoot>
-    </TableView>
-    
+    </TableView>    
 </ContentPage>
