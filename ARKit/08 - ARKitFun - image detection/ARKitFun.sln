@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.809.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ARKitFun", "ARKitFun\ARKitFun.csproj", "{3B16C262-9EA7-4EA6-83A7-69D4313D208B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+		Release|iPhone = Release|iPhone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3B16C262-9EA7-4EA6-83A7-69D4313D208B}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{3B16C262-9EA7-4EA6-83A7-69D4313D208B}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{3B16C262-9EA7-4EA6-83A7-69D4313D208B}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{3B16C262-9EA7-4EA6-83A7-69D4313D208B}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{3B16C262-9EA7-4EA6-83A7-69D4313D208B}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{3B16C262-9EA7-4EA6-83A7-69D4313D208B}.Debug|iPhone.Build.0 = Debug|iPhone
+		{3B16C262-9EA7-4EA6-83A7-69D4313D208B}.Release|iPhone.ActiveCfg = Release|iPhone
+		{3B16C262-9EA7-4EA6-83A7-69D4313D208B}.Release|iPhone.Build.0 = Release|iPhone
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {958106C0-E60C-4686-BB75-04CC7CF5733F}
+	EndGlobalSection
+EndGlobal
